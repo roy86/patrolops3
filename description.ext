@@ -1,0 +1,48 @@
+#include "mpsf\dialogs.hpp"
+//#include "po3\PO3dialogs.hpp"
+#include "VAS\VASdialogs.hpp"
+
+__EXEC(_loadscreenpicture = ["data\po3_flag_1.paa","data\po3_flag_2.paa","data\po3_flag_3.paa","data\po3_flag_4.paa"]); // <!-- BON_Inf :D
+loadScreen		= __EVAL(_loadscreenpicture select round random (count _loadscreenpicture - 1));
+overviewPicture	= "\a3\Missions_F_gamma\data\img\showcase_arma_overview_ca.paa";
+overviewText	= "$STR_MISSION_DESC";
+
+DisabledAI		= 1;			// <!-- Where 0 Fills empty playable slots with AI, 1 is They Don't fill the empty slots
+joinUnassigned		= 1;		// <!-- Where 0 forces joining players into the first empty slot, 1 leaves them to select their own
+disableChannels[]	={0,2,6};	// <!-- Restrict chat channels where (0=Global),(1=Side),(2=Command),(3=Group),(4=Vehicle),(5=Direct),(6=System)
+enableDebugConsole	= 1;		// <!-- Enable the debug console where (0=disabled),(1=Admins Only),(2=Everyone) DO NOT SET AS 2!
+showGPS			= 1;			// <!-- Allow GPS
+showCompass		= 1;			// <!-- Allow Compass
+showWatch		= 1;			// <!-- Allow Watch
+
+class Header {
+	maxPlayers = 40;	// <!-- CHANGE Where the number is the total playable slots
+	minPlayers = 1;
+	gameType = COOP;
+};
+
+class CfgDebriefing {
+	#include "mpsf\cfgDebriefing.hpp"
+};
+
+class CfgFunctions {
+	#include "mpsf\cfgFunctions.hpp"
+	#include "po3\PO3cfgFunctions.hpp"
+	#include "VAS\VAScfgFunctions.hpp"
+};
+
+class CfgNotifications {
+	#include "mpsf\cfgNotifications.hpp"
+};
+
+class CfgSounds {};
+
+class Params {
+	#include "po3\PO3params.hpp"
+	#include "mpsf\params.hpp"
+};
+
+class RscTitles {
+	#include "po3\PO3rsctitles.hpp"
+	#include "mpsf\rscTitles.hpp"
+};
