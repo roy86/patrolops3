@@ -44,7 +44,7 @@ private["_location","_position","_locaname"];
 
 			_position = _this select 0;
 			_b = _this select 1;
-			_ingress = [_position ,[400,500],random 360,false] call mpsf_fnc_getPos;
+			_ingress = [_position ,[550,750],random 360,false] call mpsf_fnc_getPos;
 
 			_vehClass = [];
 			if(_b <= 3) then { _vehClass set [count _vehClass,4]; };
