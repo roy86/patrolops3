@@ -10,9 +10,9 @@ private["_slot","_data"];
 _slot = lbCurSel VAS_load_list;
 if(_slot == -1) exitWith {hint localize "STR_VAS_Prompt_selectSlotFail";};
 if(vas_disableLoadSave) then {
-	_data = missionNamespace getVariable format["po3_VAS_gearSlot_%1_%2",player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot];
+	_data = missionNamespace getVariable format["po3_VAS_gearSlot_%1_%2_%3",side player, player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot];
 }else{
-	_data = profileNameSpace getVariable format["po3_VAS_gearSlot_%1_%2",player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot];
+	_data = profileNameSpace getVariable format["po3_VAS_gearSlot_%1_%2_%3",side player, player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot];
 };
 
 if(isNil {_data}) exitWith {hint localize "STR_VAS_Prompt_deleteSlotNoInfo";};
@@ -28,13 +28,13 @@ waitUntil {!isNil {vas_prompt_choice}};
 
 if(vas_prompt_choice) then {
 	if(vas_disableLoadSave) then {
-		hint format["%2:\n%1",(missionNamespace getVariable format["po3_VAS_gearSlot_%1_%2",player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot]) select 0,localize "STR_VAS_Prompt_deleteSuccess"];
-		missionNamespace setVariable[format["po3_VAS_gearSlot_%1_%2",player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot],nil];
+		hint format["%2:\n%1",(missionNamespace getVariable format["po3_VAS_gearSlot_%1_%2_%3",side player, player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot]) select 0,localize "STR_VAS_Prompt_deleteSuccess"];
+		missionNamespace setVariable[format["po3_VAS_gearSlot_%1_%2_%3",side player, player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot],nil];
 		[1,true] spawn VAS_fnc_SaveLoad;
 		vas_prompt_choice = nil;
 	}else{
-		hint format["You deleted slot:\n%1",(profileNameSpace getVariable format["po3_VAS_gearSlot_%1_%2",player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot]) select 0];
-		profileNameSpace setVariable[format["po3_VAS_gearSlot_%1_%2",player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot],nil];
+		hint format["You deleted slot:\n%1",(profileNameSpace getVariable format["po3_VAS_gearSlot_%1_%2_%3",side player, player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot]) select 0];
+		profileNameSpace setVariable[format["po3_VAS_gearSlot_%1_%2_%3",side player, player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot],nil];
 		saveProfileNamespace;
 		[1,true] spawn VAS_fnc_SaveLoad;
 		vas_prompt_choice = nil;

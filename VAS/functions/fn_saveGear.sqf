@@ -60,9 +60,9 @@ if("Laserdesignator" in assignedItems player) then {
 player selectWeapon _curWep;
 
 if(vas_disableLoadSave) then {
-	missionNamespace setVariable [ format["po3_VAS_gearSlot_%1_%2",player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot],[_title,_primary,_launcher,_handgun,_magazines,_uniform,_vest,_backpack,_items,_primitems,_secitems,_handgunitems,_uitems,_vitems,_bitems]];
+	missionNamespace setVariable [ format["po3_VAS_gearSlot_%1_%2_%3",side player, player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot],[_title,_primary,_launcher,_handgun,_magazines,_uniform,_vest,_backpack,_items,_primitems,_secitems,_handgunitems,_uitems,_vitems,_bitems]];
 }else{
-	profileNameSpace setVariable [ format["po3_VAS_gearSlot_%1_%2",player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot],[_title,_primary,_launcher,_handgun,_magazines,_uniform,_vest,_backpack,_items,_primitems,_secitems,_handgunitems,_uitems,_vitems,_bitems]];
+	profileNameSpace setVariable [ format["po3_VAS_gearSlot_%1_%2_%3",side player, player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot],[_title,_primary,_launcher,_handgun,_magazines,_uniform,_vest,_backpack,_items,_primitems,_secitems,_handgunitems,_uitems,_vitems,_bitems]];
 	saveProfileNamespace;
 };
 

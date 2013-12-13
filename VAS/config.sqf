@@ -1,7 +1,7 @@
 vas_onRespawn = false;
 vas_preload = false;
 vas_disableLoadSave = false;
-vas_customslots = 9;
+vas_customslots = 4;
 vas_disableSafetyCheck = true;
 
 vas_weapons = [];

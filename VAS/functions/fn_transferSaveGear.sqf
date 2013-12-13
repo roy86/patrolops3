@@ -15,9 +15,9 @@ if(_slot == -1) exitWith {hint localize"STR_VAS_Prompt_slotSelFail"};
 
 VAS_Loadout_Gear set[0,_title];
 if(vas_disableLoadSave) then {
-	missionNamespace setVariable[format["po3_VAS_gearSlot_%1_%2",player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot],VAS_Loadout_Gear];
+	missionNamespace setVariable[format["po3_VAS_gearSlot_%1_%2_%3",side player, player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot],VAS_Loadout_Gear];
 }else{
-	profileNameSpace setVariable[format["po3_VAS_gearSlot_%1_%2",player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot],VAS_Loadout_Gear];
+	profileNameSpace setVariable[format["po3_VAS_gearSlot_%1_%2_%3",side player, player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot],VAS_Loadout_Gear];
 	saveProfileNamespace;
 };
 

@@ -20,16 +20,16 @@ lbClear _control; //Flush the control/list
 
 if(vas_disableLoadSave) then {
 	for "_i" from 0 to vas_customslots do {
-		if(!isNil {missionNamespace getVariable format["po3_VAS_gearSlot_%1_%2",player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_i]}) then {
-			_control lbAdd format["%1",(missionNamespace getVariable format["po3_VAS_gearSlot_%1_%2",player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],i]) select 0];
+		if(!isNil {missionNamespace getVariable format["po3_VAS_gearSlot_%1_%2_%3",side player, player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_i]}) then {
+			_control lbAdd format["%1",(missionNamespace getVariable format["po3_VAS_gearSlot_%1_%2_%3",side player, player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_i]) select 0];
 		}else{
 			_control lbAdd format["%1 %2",localize "STR_VAS_Main_CL", _i+1];
 		};
 	};
 }else{
 	for "_i" from 0 to vas_customslots do {
-		if(!isNil {profileNamespace getVariable format["po3_VAS_gearSlot_%1_%2",player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_i]} ) then {
-			_control lbAdd format["%1",(profileNamespace getVariable format["po3_VAS_gearSlot_%1_%2",player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_i]) select 0];
+		if(!isNil {profileNamespace getVariable format["po3_VAS_gearSlot_%1_%2_%3",side player, player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_i]} ) then {
+			_control lbAdd format["%1",(profileNamespace getVariable format["po3_VAS_gearSlot_%1_%2_%3",side player, player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_i]) select 0];
 		}else{
 			_control lbAdd format["%1 %2",localize "STR_VAS_Main_CL", _i+1];
 		};

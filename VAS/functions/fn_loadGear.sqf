@@ -12,9 +12,9 @@ _slot = if(isNil {_this select 0}) then {lbCurSel VAS_load_list} else {_this sel
 if(_slot == -1) exitWith {hint localize "STR_VAS_Prompt_slotSelFail";};
 
 if(vas_disableLoadSave) then {
-	_loadout = missionNamespace getVariable format["po3_VAS_gearSlot_%1_%2",player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot];
+	_loadout = missionNamespace getVariable format["po3_VAS_gearSlot_%1_%2_%3",side player, player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot];
 }else{
-	_loadout = profileNamespace getVariable format["po3_VAS_gearSlot_%1_%2",player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot];
+	_loadout = profileNamespace getVariable format["po3_VAS_gearSlot_%1_%2_%3",side player, player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot];
 };
 
 if(isNil {_loadout}) exitWith {}; //Slot data doesn't exist

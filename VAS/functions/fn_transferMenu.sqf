@@ -16,9 +16,9 @@ _slot = lbCurSel VAS_load_list;
 if(_slot == -1) exitWith {hint localize "STR_VAS_Transfer_NoSlotSelection";};
 
 if(vas_disableLoadSave) then {
-    VAS_Transfer_Loadout = missionNamespace getVariable format["po3_VAS_gearSlot_%1_%2",player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot];
+    VAS_Transfer_Loadout = missionNamespace getVariable format["po3_VAS_gearSlot_%1_%2_%3",side player, player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot];
 }else{
-    VAS_Transfer_Loadout = profileNamespace getVariable format["po3_VAS_gearSlot_%1_%2",player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot];
+    VAS_Transfer_Loadout = profileNamespace getVariable format["po3_VAS_gearSlot_%1_%2_%3",side player, player getVariable ["mpsf_VAR_roleAttribute","Rifleman"],_slot];
 };
 
 if(isNil "VAS_Transfer_Loadout") exitWith {hint localize "STR_VAS_Transfer_NoSlotSelection";};
