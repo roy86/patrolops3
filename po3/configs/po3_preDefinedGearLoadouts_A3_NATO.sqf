@@ -15,7 +15,7 @@ _backpackList = [// Backpacks
 
 [
 	["Leader",[// Weapons
-			"arifle_MX_F","arifle_MX_GL_F","arifle_SDAR_F","srifle_EBR_F","hgun_P07_F","hgun_Pistol_heavy_01_F"
+			"arifle_MX_F","arifle_MX_Black_F","arifle_MX_GL_F","arifle_MX_GL_Black_F","arifle_SDAR_F","srifle_EBR_F","hgun_P07_F","hgun_Pistol_heavy_01_F"
 		],[// Mags
 			"HandGrenade","SmokeShellBlue","SmokeShellGreen","SmokeShellRed","SmokeShell","Chemlight_blue","Chemlight_green","Chemlight_red"
 		],[// Items
@@ -26,9 +26,9 @@ _backpackList = [// Backpacks
 		],_backpackList
 	],
 	["Rifleman",[// Weapons
-			"arifle_MX_F","arifle_SDAR_F","srifle_EBR_F","hgun_P07_F","hgun_Pistol_heavy_01_F"
+			"arifle_MX_F","arifle_MX_Black_F","arifle_SDAR_F","srifle_EBR_F","hgun_P07_F","hgun_Pistol_heavy_01_F"
 		],[// Mags
-			"HandGrenade","SmokeShellBlue","SmokeShellGreen","SmokeShellRed","SmokeShell","Chemlight_blue","Chemlight_green","Chemlight_red"
+			"HandGrenade","SmokeShellBlue","SmokeShellGreen","SmokeShellRed","SmokeShell","Chemlight_blue","Chemlight_green","Chemlight_red","Titan_AP","Titan_AT","NLAW_F","200Rnd_65x39_cased_Box", "200Rnd_65x39_cased_Box_Tracer","100Rnd_65x39_caseless_mag", "100Rnd_65x39_caseless_mag_Tracer"
 		],[// Items
 			"NVGoggles","Binocular","FirstAidKit","ItemCompass","ItemGPS","ItemMap","ItemRadio","ItemWatch","MineDetector"
 			,"U_B_CombatUniform_mcam","U_B_CombatUniform_mcam_tshirt","U_B_CombatUniform_mcam_vest","U_B_Wetsuit"
@@ -37,7 +37,7 @@ _backpackList = [// Backpacks
 		],_backpackList
 	],
 	["Grenadier",[// Weapons
-			"arifle_MX_F","arifle_MX_GL_F","arifle_SDAR_F","srifle_EBR_ACO_F","hgun_P07_F","hgun_Pistol_heavy_01_F"
+			"arifle_MX_F","arifle_MX_Black_F","arifle_MX_GL_F","arifle_MX_GL_Black_F","arifle_SDAR_F","srifle_EBR_ACO_F","hgun_P07_F","hgun_Pistol_heavy_01_F"
 		],[// Mags
 			"HandGrenade","SmokeShellBlue","SmokeShellGreen","SmokeShellRed","SmokeShell","Chemlight_blue","Chemlight_green","Chemlight_red","APERSBoundingMine_Range_Mag","APERSMine_Range_Mag","DemoCharge_Remote_Mag","SatchelCharge_Remote_Mag"
 		],[// Items
@@ -48,7 +48,7 @@ _backpackList = [// Backpacks
 		],_backpackList
 	],
 	["AutoRifleman",[// Weapons
-			"arifle_MX_F","arifle_MX_SW_F","arifle_SDAR_F","LMG_Mk200_F","hgun_P07_F","hgun_Pistol_heavy_01_F"
+			"arifle_MX_F","arifle_MX_Black_F","arifle_MX_SW_F","arifle_MX_SW_Black_F","arifle_SDAR_F","LMG_Mk200_F","hgun_P07_F","hgun_Pistol_heavy_01_F"
 		],[// Mags
 			"HandGrenade","SmokeShellBlue","SmokeShellGreen","SmokeShellRed","SmokeShell","Chemlight_blue","Chemlight_green","Chemlight_red"
 		],[// Items
@@ -59,7 +59,7 @@ _backpackList = [// Backpacks
 		],_backpackList
 	],
 	["MissileSpecialist",[// Weapons
-			"arifle_MX_F","arifle_SDAR_F","launch_B_Titan_F","launch_B_Titan_short_F","launch_NLAW_F","hgun_P07_F","hgun_Pistol_heavy_01_F"
+			"arifle_MX_F","arifle_MX_Black_F","arifle_SDAR_F","launch_B_Titan_F","launch_B_Titan_short_F","launch_NLAW_F","hgun_P07_F","hgun_Pistol_heavy_01_F"
 		],[// Mags
 			"HandGrenade","SmokeShellBlue","SmokeShellGreen","SmokeShellRed","SmokeShell","Chemlight_blue","Chemlight_green","Chemlight_red"
 		],[// Items
@@ -70,7 +70,7 @@ _backpackList = [// Backpacks
 		],_backpackList
 	],
 	["Medic",[// Weapons
-			"arifle_MX_F","arifle_SDAR_F","srifle_EBR_ACO_F","hgun_P07_F","hgun_Pistol_heavy_01_F"
+			"arifle_MX_F","arifle_MX_Black_F","arifle_SDAR_F","srifle_EBR_ACO_F","hgun_P07_F","hgun_Pistol_heavy_01_F"
 		],[// Mags
 			"HandGrenade","SmokeShellBlue","SmokeShellGreen","SmokeShellRed","SmokeShell","Chemlight_blue","Chemlight_green","Chemlight_red"
 		],[// Items
@@ -81,7 +81,7 @@ _backpackList = [// Backpacks
 		],_backpackList
 	],
 	["UASOperator",[// Weapons
-			"arifle_MX_F","arifle_SDAR_F","hgun_P07_F","hgun_Pistol_heavy_01_F"
+			"arifle_MX_F","arifle_MX_Black_F","arifle_SDAR_F","hgun_P07_F","hgun_Pistol_heavy_01_F"
 		],[// Mags
 			"HandGrenade","SmokeShellBlue","SmokeShellGreen","SmokeShellRed","SmokeShell","Chemlight_blue","Chemlight_green","Chemlight_red"
 		],[// Items
@@ -92,7 +92,7 @@ _backpackList = [// Backpacks
 		],_backpackList
 	],
 	["Crewman",[// Weapons
-			"arifle_MXC_F","arifle_SDAR_F","SMG_01_F","hgun_P07_F","hgun_Pistol_heavy_01_F"
+			"arifle_MXC_F","arifle_MXC_Black_F","arifle_SDAR_F","SMG_01_F","hgun_P07_F","hgun_Pistol_heavy_01_F"
 		],[// Mags
 			"HandGrenade","SmokeShellBlue","SmokeShellGreen","SmokeShellRed","SmokeShell","Chemlight_blue","Chemlight_green","Chemlight_red"
 		],[// Items
@@ -103,7 +103,7 @@ _backpackList = [// Backpacks
 		],_backpackList
 	],
 	["Pilot",[// Weapons
-			"arifle_MXC_F","arifle_SDAR_F","SMG_01_F","hgun_P07_F","hgun_Pistol_heavy_01_F"
+			"arifle_MXC_F","arifle_MXC_Black_F","arifle_SDAR_F","SMG_01_F","hgun_P07_F","hgun_Pistol_heavy_01_F"
 		],[// Mags
 			"HandGrenade","SmokeShellBlue","SmokeShellGreen","SmokeShellRed","SmokeShell","Chemlight_blue","Chemlight_green","Chemlight_red"
 		],[// Items
@@ -114,7 +114,7 @@ _backpackList = [// Backpacks
 		],_backpackList
 	],
 	["Recon",[ // Weapons
-			"arifle_MX_F","arifle_MX_SW_F","arifle_MXC_F","arifle_MXM_F","arifle_SDAR_F","SMG_01_F","hgun_P07_F","hgun_Pistol_heavy_01_F"
+			"arifle_MX_F","arifle_MX_Black_F","arifle_MXC_F","arifle_MXC_Black_F","arifle_MXM_F","arifle_MXM_Black_F","arifle_SDAR_F","SMG_01_F","hgun_P07_F","hgun_Pistol_heavy_01_F"
 		],[// Mags
 			"HandGrenade","SmokeShellBlue","SmokeShellGreen","SmokeShellRed","SmokeShell","Chemlight_blue","Chemlight_green","Chemlight_red","Laserbatteries"
 		],[// Items
@@ -125,7 +125,7 @@ _backpackList = [// Backpacks
 		],_backpackList
 	],
 	["Marksman",[// Weapons
-			"arifle_MX_F","arifle_MXC_F","arifle_MXM_F","arifle_SDAR_F","SMG_01_F","srifle_EBR_ACO_F","srifle_LRR_F","hgun_P07_F","hgun_Pistol_heavy_01_F"
+			"arifle_MX_F","arifle_MX_Black_F","arifle_MXC_F","arifle_MXC_Black_F","arifle_MXM_F","arifle_MXM_Black_F","arifle_SDAR_F","SMG_01_F","srifle_EBR_ACO_F","srifle_LRR_F","hgun_P07_F","hgun_Pistol_heavy_01_F"
 		],[// Mags
 			"HandGrenade","SmokeShellBlue","SmokeShellGreen","SmokeShellRed","SmokeShell","Chemlight_blue","Chemlight_green","Chemlight_red","Laserbatteries"
 		],[// Items
