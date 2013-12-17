@@ -15,6 +15,7 @@ if !(_unit IN (units _group)) then {
 	sleep 0.1;
 };
 
+{ if(_x == _unit) then { _x setUnitRank "SERGEANT" }else{ _x setUnitRank "PRIVATE" }; }forEach (units _group);
 _group selectLeader _unit;
 
 [ _unit, "GROUP", format[localize "STR_MPSF_DIALOG_ASSIGNLEADERGROUP", str _group] ] call mpsf_fnc_sendChat;
