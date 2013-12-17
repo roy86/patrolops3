@@ -2,7 +2,7 @@
 	Author: Eightysix
 
 	Description:
-	
+
 */
 if(!mpsfCLI) exitWith {};
 
@@ -15,7 +15,7 @@ true call mpsf_fnc_setActionBusy;
 
 player playMove "AinvPknlMstpSlayWrflDnon_medic";
 sleep 8;
-if!(alive player) exitwith {}; 
+if!(alive player) exitwith {};
 
 _pos = player call mpsf_fnc_getPos;
 _dir = direction player;
@@ -26,6 +26,7 @@ _rallypoint = createVehicle [_type, _position, [], 0, "CAN_COLLIDE"];
 _rallypoint setDir (_dir - 90);
 _rallypoint setVariable ["mpsf_rallypoint",true,true];
 _rallypoint setVariable ["mpsf_rallypoint_owner",name player,true];
+missionNamespace setVariable ["mpsf_rallypoint_deployed",_rallypoint,false];
 
 player reveal _rallypoint;
 
@@ -38,7 +39,8 @@ mpsf_respawn_rallypoint_active = true;
 waitUntil { sleep 1; !(_rallypoint getVariable ["mpsf_rallypoint",false]) || !(alive _rallypoint) };
 mpsf_respawn_rallypoint_active = false;
 
-[ "rally" ] call mpsf_fnc_removeRespawnPosLocal;
+missionNamespace setVariable ["mpsf_rallypoint_deployed",objNull,false];
 deleteVehicle _rallypoint;
+[ "rally" ] call mpsf_fnc_removeRespawnPosLocal;
 
 [localize "STR_MPSF_RESPWN_RALLYREMVE"] call mpsf_fnc_hint;
