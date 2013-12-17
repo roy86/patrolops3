@@ -145,6 +145,9 @@ class FSM
        "_action = _vehicle addAction [""<t color='#ffc600'>""+localize ""STR_MPSF_ACTION_CREATERALLY""+""</t>"",{ [] spawn mpsf_fnc_createRallypoint; },[],-100,false,true,"""",""mpsf_param_respawn_rallypoint_allow && !mpsf_playerIsBusy && !mpsf_respawn_rallypoint_active && _target distance (getMarkerPos format[""""respawn_%1"""",playerside]) > 1500 && !(surfaceIsWater(getPos _target))""];" \n
        "_self_actions set [count _self_actions, _action];" \n
        "" \n
+       "_action = _vehicle addAction [format[""<t color='#ffc600'>""+localize ""STR_MPSF_ACTION_REMOVERALLY""+""</t>"",""""],{ [ missionNamespace getVariable [""mpsf_rallypoint_deployed"",objNull] ] spawn mpsf_fnc_removeRallypoint; },[],-100,false,true,"""",""mpsf_param_respawn_rallypoint_allow && !mpsf_playerIsBusy && mpsf_respawn_rallypoint_active && _target distance (getMarkerPos format[""""respawn_%1"""",playerside]) < 100""];" \n
+       "_self_actions set [count _self_actions, _action];" \n
+       "" \n
        "_action = _vehicle addAction [""<t color='#ffc600'>""+localize ""STR_MPSF_ACTION_REDEPLOYUNIT""+""</t>"",{ [] spawn mpsf_fnc_redeploy; },[],100,false,true,"""",""!mpsf_playerIsBusy && ({ _x getVariable ['mpsf_redeploy',false]} count (nearestObjects [_target,['ALL'],5]) > 0)""];" \n
        "_self_actions set [count _self_actions, _action];" \n
        "" \n
