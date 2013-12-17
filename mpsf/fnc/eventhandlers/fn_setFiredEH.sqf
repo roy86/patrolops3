@@ -6,7 +6,7 @@ private["_vehicle "];
 
 _vehicle = _this;
 
-if(typeName _vehicle != typeName objNull) exitWith { ["EventHandler","Fired EH failed to detect Object",true] call mpsf_fnc_log };
+if(typeName _vehicle != typeName objNull) exitWith { ["EventHandler","Fired EH failed to detect Object"] call mpsf_fnc_log };
 
 if(!isnil {_vehicle getVariable ["mpsf_EH_Fired",nil]}) then {
 	_vehicle removeEventHandler ["Fired",_vehicle getVariable ["mpsf_EH_Fired",0] ];
@@ -22,7 +22,7 @@ _ehF = _vehicle addEventHandler ["Fired",{
 			_p distance (getMarkerPos "respawn_east") < 500 ||
 			_p distance (getMarkerPos "respawn_guerrila") < 500
 		)then {
-				[true,"HINTC",localize "STR_MPSF_DIALOG_CEASEFIRE"] call mpsf_fnc_hint;
+				[player,"HINTC",localize "STR_MPSF_DIALOG_CEASEFIRE"] call mpsf_fnc_hint;
 				deleteVehicle _p;
 		}else{
 			_p spawn {
@@ -32,7 +32,7 @@ _ehF = _vehicle addEventHandler ["Fired",{
 						_this distance (getMarkerPos "respawn_east") < 500 ||
 						_this distance (getMarkerPos "respawn_guerrila") < 500
 					)then {
-						[true,"HINTC",localize "STR_MPSF_DIALOG_CEASEFIRE"] call mpsf_fnc_hint;
+						[player,"HINTC",localize "STR_MPSF_DIALOG_CEASEFIRE"] call mpsf_fnc_hint;
 						deleteVehicle _this;
 					};
 					if( isNull _this ) exitWith { true };
