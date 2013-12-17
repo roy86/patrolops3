@@ -350,7 +350,8 @@
 			class setAsPilot			{ description = "MPSF COMMAND - Set unit as Pilot"; };
 			class setGroupID			{ description = "MPSF COMMAND - Set a groups description"; };
 			class setUnqualified		{ description = "MPSF COMMAND - Set unit as nothing"; };
-			class showChemLight			{ description = "MPSF COMMAND - Show a chemlight on a unit based on their assigned squad"; };
+			class showCemLight			{ description = "MPSF COMMAND - Show a chemlight on a unit based on their assigned squad"; };
+			class sqdmodFunctions		{ description = "MPSF COMMAND - Functions for Squad Mod"; };
 			class unitJoinGroup			{ description = "MPSF COMMAND - Joins a unit to a group"; };
 			class unitKickFromGroup		{ description = "MPSF COMMAND - Kick a unit from a squad"; };
 			class unitLeaveGroup		{ description = "MPSF COMMAND - Move a unit to an empty group"; };
