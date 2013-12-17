@@ -1,9 +1,9 @@
-/*%FSM<COMPILE "C:\Program Files (x86)\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, bloodloss">*/
+/*%FSM<COMPILE "scriptedFSM.cfg, bloodloss">*/
 /*%FSM<HEAD>*/
 /*
-item0[] = {"start",0,4346,-373.662689,-270.615845,-333.829987,-243.358398,0.000000,"start"};
+item0[] = {"start",0,250,-373.662689,-270.615845,-333.829987,-243.358398,0.000000,"start"};
 item1[] = {"_",8,218,-51.170582,-269.230865,-14.013382,-247.324463,0.000000,""};
-item2[] = {"fade_out",2,250,-56.521717,-186.956528,-5.986601,-146.321106,0.000000,"fade" \n "out"};
+item2[] = {"fade_out",2,4346,-56.521717,-186.956528,-5.986601,-146.321106,0.000000,"fade" \n "out"};
 item3[] = {"sleep",4,218,-64.407600,-100.484978,1.512154,-59.180626,0.000000,"sleep"};
 item4[] = {"healed___died",4,218,116.722412,-113.377907,206.722412,-63.377907,50.000000,"healed /" \n "died"};
 item5[] = {"bleed_of_death",4,218,-259.866211,-120.066917,-155.819397,-75.418060,99.000000,"bleed of death"};
@@ -21,8 +21,8 @@ link6[] = {3,2};
 link7[] = {4,7};
 link8[] = {5,6};
 link9[] = {8,9};
-globals[] = {0.000000,0,0,0,0,640,480,1,16,6316128,1,-394.074188,187.909012,278.929840,-343.355072,852,911,1};
-window[] = {2,-1,-1,-1,-1,811,75,1335,75,3,870};
+globals[] = {0.000000,0,0,0,0,640,480,1,16,6316128,1,-394.074188,187.909012,278.929840,-343.355072,924,881,1};
+window[] = {2,-1,-1,-1,-1,911,175,1435,175,3,942};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -34,14 +34,13 @@ class FSM
     {
       name = "start";
       init = /*%FSM<STATEINIT""">*/"_unit = _this select 0;" \n
-       "_is_ai = not isPlayer _unit;" \n
-       "_rambovalue = mpsf_param_injury_factor;" \n
-       "_randomfactor = 50 + random 50;" \n
-       "_times_blinking = 15;" \n
-       "_fadetime = _times_blinking/100;" \n
-       "_fadecounter = 0;" \n
-       "_time_of_agony = time;" \n
-       "_timenow = time;" \n
+       "_is_ai = if !(isPlayer _unit) then { true }else{ false };" \n
+       "" \n
+       "_timer = 180;" \n
+       "" \n
+       "_timeStart = time;" \n
+       "_timeNow = time;" \n
+       "_timeBleedout = time + _timer;" \n
        "" \n
        "_ppEffBlur = 0;" \n
        "_ppEffColour = 0;" \n
@@ -82,17 +81,15 @@ class FSM
     class fade_out
     {
       name = "fade_out";
-      init = /*%FSM<STATEINIT""">*/"_average_damage = damage _unit;" \n
+      init = /*%FSM<STATEINIT""">*/"_timeNow = time;" \n
+       "_timeleft = (_timeBleedout - _timeNow) / _timer;" \n
        "" \n
-       "_blinkduration = 0.5 + random 0.5;" \n
-       "_timeleft = (_rambovalue - _average_damage) * _randomfactor  -  (time - _time_of_agony) - _blinkduration;" \n
-       "_timeleft_normalized = 1 - (time - _time_of_agony)/((_rambovalue - _average_damage) * _randomfactor);" \n
-       "_timenow = time;" \n
+       "[ [_unit],[""Bloodloss"",(_timeleft max 0) min 1] ] call mpsf_fnc_progressBar;" \n
        "" \n
        "if(_unit == player) then {" \n
        "	_ppEffBlur ppEffectAdjust [random 0.025, random 0.025, 0.0, 0.0]; " \n
        "	_ppEffBlur ppEffectCommit 0.5; " \n
-       "	_ppEffColour ppEffectAdjust [_timeleft_normalized, 1.0, 0.0, random 0.75, 0.0, 0.0, random 0.75, 0.0, 0.0, 1.0, 1.0, 0.199, 0.587, 0.114, 1.0]; " \n
+       "	_ppEffColour ppEffectAdjust [_timeleft, 1.0, 0.0, random 0.75, 0.0, 0.0, random 0.75, 0.0, 0.0, 1.0, 1.0, 0.199, 0.587, 0.114, 1.0]; " \n
        "	_ppEffColour ppEffectCommit 0.5;" \n
        "};"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -104,7 +101,7 @@ class FSM
           priority = 99.000000;
           to="death";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"_timeleft <= 0"/*%FSM</CONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"time > _timeBleedout"/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/
@@ -124,7 +121,7 @@ class FSM
           priority = 0.000000;
           to="fade_out";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"time - _timenow > _blinkduration"/*%FSM</CONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"time - _timeNow > 1"/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/
