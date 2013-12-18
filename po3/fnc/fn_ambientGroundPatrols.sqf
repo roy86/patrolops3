@@ -2,61 +2,121 @@
 if(!mpsfSRV || !isNil "po3_VAR_ambientGroundPatrols_active") exitWith{};
 po3_VAR_ambientGroundPatrols_active = true;
 
-_wparray = [];
+po3_pos_allowed = [_locBSE,_locCTY,_locHIL,_locTWN,_locWTR,_locPOI,_locAIR,_locOTH,_locRSP];
+
+_positions = [];
 {
 	_pos = (_x select 0) call mpsf_fnc_getPos;
 	if !(surfaceIsWater _pos) then{
-		_wparray set [count _wparray,_pos];
+		_positions set [count _positions,_pos];
 	};
-} foreach (po3_pos_allowed select 5);
+} foreach ( (po3_pos_allowed select 0) /*BASES*/ + (po3_pos_allowed select 3) /*TOWNS*/ + (po3_pos_allowed select 5) /*POI*/ + (po3_pos_allowed select 7) /*OTHER*/ );
 
-_wparray = _wparray call mpsf_fnc_arrayShuffle;
-
-_script = _wparray spawn {
-	private["_class","_vehicle","_group","_airframe","_position","_wp"];
-	_Tunits = [];
-	_wparray = _this;
-
-	While { true } do{
-		_rndpos = _wparray call mpsf_fnc_getArrayRandom;
-		_class = "SQUAD";
-		_grp = if(random 1 > 0.5 ) then {
-			[ _rndpos, (po3_side_3 select 0),format["EN_PatrolGroup%1",round random 2] ] call mpsf_fnc_createGroup;
+_PO3_CACHE_AMBIENTGROUNDPATROLS = [];
+for "_i" from 0 to 1000 do {
+	_entity = [count _PO3_CACHE_AMBIENTGROUNDPATROLS];
+	_entity set [1,false]; // Active Flag
+	_entity set [2,_positions call mpsf_fnc_getArrayRandom]; // Current Position
+	_entity set [3,_positions call mpsf_fnc_getArrayRandom]; // Destination Position
+	_entity set [4, // Entity Type
+		if(random 1 > 0.5) then {
+			"VEH"
 		}else{
-			_class = ([3,4,5] call po3_fnc_getVehicleTypes) call mpsf_fnc_getArrayRandom;
-			([ _rndpos, _class,0,0, (po3_side_3 select 0)] call mpsf_fnc_createVehicle) select 0;
-		};
+			"INF"
+		}
+	];
+	_entity set [5,
+		if(_entity select 3 == "VEH") then {
+			([3,4,5] call po3_fnc_getVehicleTypes) call mpsf_fnc_getArrayRandom
+		}else{
+			format["EN_PatrolGroup%1",round random 2]
+		}
+	]; // Entity Class
+	_entity set [6,grpNull]; // Current Group
+	_PO3_CACHE_AMBIENTGROUNDPATROLS set [count _PO3_CACHE_AMBIENTGROUNDPATROLS,_entity]
+};
 
-		_Side1Count = playersNumber (po3_side_1 select 0);
-		_Side2Count = playersNumber (po3_side_2 select 0);
-		_factor = 3*(1 max round(log(_Side1Count+_Side2Count)));
-		_refCount = count(units _grp) * _factor;
-		_Tunits = _Tunits + (units _grp);
+_updateCachePos = {
+	_orgPos = _this select 0;
+	_desPos = _this select 1;
+	_type = _this select 2;
+	_water = false;
+	_speed = switch(_type) do {
+		case "INF" : { 5 };
+		case "VEH" : { 65 };
+		case "BOT" : { _water = true; 110 };
+		case "HEL" : { 160 };
+		case "PLN" : { _water = true; 200 };
+		default { 5 };
+	};
+	_dir = [_orgPos, _desPos] call BIS_fnc_dirTo;
+	_return = [_orgPos,_speed,_dir,_water] call mpsf_fnc_getPos;
+	_return;
+};
 
-		{
-			_position = _x call mpsf_fnc_getPos;
-			_wp = _grp addWaypoint [_position,150];
-			_wp setWaypointCompletionRadius 200;
+waitUntil {
+	sleep 1;
 
-			if(_forEachIndex == 0) then {
+	{
+		_entity = _x;
+		_entityID = _entity select 0;
+		_position = _entity select 2;
+		_destination = _entity select 3;
+		_type = _entity select 4;
+		_class = _entity select 5;
+		_groupID = _entity select 6;
+		if( _entity select 1 ) then {
+			// Update Entities Position
+			_entity set [2,position leader _groupID];
+			if( count ([(_entity select 2),1500,[west,east,resistance],["CAManBase","LandVehicle","Air"] ] call mpsf_fnc_getNearbyPlayers) == 0) then {
+				// Deactivate
+				{deleteVehicle _x}foreach (units _groupID);
+				deleteGroup _groupID;
+				_entity set [1,false];
+				_entity set [6,grpNull];
+			}else{
+				// Set New Waypoint if they reach current destination
+				if( (_entity select 2) distance _destination < 100) then {
+					{deleteWaypoint _x} foreach waypoints (_groupID);
+					_newDestination = _positions call mpsf_fnc_getArrayRandom;
+					_wp = _groupID addWaypoint [_newDestination,0];
+					_wp setWaypointType "MOVE";
+					_wp setWaypointCompletionRadius 20;
+					_wp setWaypointSpeed "NORMAL";
+					_wp setWaypointBehaviour "SAFE";
+					_wp setWaypointFormation "STAG COLUMN";
+
+					_entity set [3,_newDestination];
+				};
+			};
+		}else{
+			if( count ([_position,1500,[west,east,resistance],["CAManBase","LandVehicle","Air"] ] call mpsf_fnc_getNearbyPlayers) > 0) then {
+				// Activate
+				_groupID = [ _position, (po3_side_3 select 0),_class] call mpsf_fnc_createGroup;
+
+				_wp = _groupID addWaypoint [_destination,0];
+				_wp setWaypointType "MOVE";
+				_wp setWaypointCompletionRadius 20;
 				_wp setWaypointSpeed "NORMAL";
 				_wp setWaypointBehaviour "SAFE";
 				_wp setWaypointFormation "STAG COLUMN";
+
+				_entity set [1,true];
+				_entity set [6,_groupID];
+
+				["PO3",format["po3_fnc_ambientGroundPatrols: Created %1",[_groupID,_class]],true ] call mpsf_fnc_log;
+			}else{
+				// Update Position
+				_newPos = [(_entity select 2),(_entity select 3),(_entity select 4)] call _updateCachePos;
+				_entity set [2,_newPos];
+				if( (_entity select 2) distance _destination < 100) then {
+					_newDestination = _positions call mpsf_fnc_getArrayRandom;
+					_entity set [3,_newDestination];
+				};
 			};
+		};
+		_PO3_CACHE_AMBIENTGROUNDPATROLS set [_entityID,_entity];
+	}forEach _PO3_CACHE_AMBIENTGROUNDPATROLS;
 
-			if(mpsf_debug) then {
-				_marker = createMarkerlocal [format["mpsf_temp_ap%1",_x],_x];
-				_marker setMarkerTypelocal "mil_dot";
-				_marker setMarkersizelocal [0.3,0.3];
-				_marker setMarkerTextlocal ("GND" + str _forEachIndex);
-			};
-		} foreach _this;
-
-		_wp = _grp addWaypoint [waypointPosition [_grp,0],100];
-		_wp setWaypointType "CYCLE";
-
-		["PO3",format["po3_fnc_ambientGroundPatrols: Created %1",[_grp,_class]],true ] call mpsf_fnc_log;
-
-		while { {alive _x} count _Tunits  >= _refCount } do { sleep 30 };
-	};
+	false;
 };
