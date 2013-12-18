@@ -2,8 +2,8 @@
 if(!mpsfSRV || !isNil "po3_VAR_ambientGroundPatrols_active") exitWith{};
 po3_VAR_ambientGroundPatrols_active = true;
 
-_cacheRadius = 1500;
-_cacheLimit = 1000;
+_cacheRadius = _this select 0;
+_cacheLimit = _this select 1;
 
 _positions = [];
 {
@@ -69,7 +69,9 @@ waitUntil {
 		if( _entity select 1 ) then {
 			// Update Entities Position
 			_entity set [2,position leader _groupID];
-			if( count ([(_entity select 2),_cacheRadius,[west,east,resistance],["CAManBase","LandVehicle","Air"] ] call mpsf_fnc_getNearbyPlayers) == 0) then {
+			if( count ([(_entity select 2),_cacheRadius,[west,east,resistance],["CAManBase","LandVehicle","Air"] ] call mpsf_fnc_getNearbyPlayers) == 0) 
+
+then {
 				// Deactivate
 				{deleteWaypoint _x} foreach waypoints (_groupID);
 				{ deleteVehicle vehicle _x; deleteVehicle _x; }foreach (units _groupID);
