@@ -51,6 +51,7 @@ for "_j" from 0 to (_strength - 1) do {
 	_unit = _spwngrp createUnit [_units select _j, _position, [], 0, "NONE"];
 	_unit setSkill mpsf_param_ai_skill;
 	_unit allowFleeing 0;
+	_unit setPos formationPosition _unit;
 };
 
 if(mpsf_param_ai_easyKill) then { (units _spwngrp) spawn mpsf_fnc_setDamageEH_AI; };
