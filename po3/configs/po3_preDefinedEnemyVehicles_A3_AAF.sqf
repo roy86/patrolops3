@@ -3,25 +3,25 @@
 	 []
 
 /* 1 - Attack Helos */
-	,[]
+	,["I_Heli_light_03_F"]
 
 /* 2 - Attack Planes */
 	,["I_Plane_Fighter_03_AA_F","I_Plane_Fighter_03_CAS_F"]
 
 /* 3 - Heavy Vehicles */
-	,["I_APC_Wheeled_03_cannon_F"]
+	,["I_MBT_03_cannon_F","I_APC_tracked_03_cannon_F"]
 
 /* 4 - Light Vehicles */
 	,["I_MRAP_03_hmg_F","I_MRAP_03_gmg_F"]
 
 /* 5 - Medium Vehicles */
-	,["I_APC_Wheeled_03_cannon_F"]
+	,["I_APC_Wheeled_03_cannon_F","I_APC_tracked_03_cannon_F"]
 
 /* 6 - Mobile Artillery */
 	,[]
 
 /* 7 - Transport Helos */
-	,["I_Heli_Transport_02_F"]
+	,["I_Heli_Transport_02_F","I_Heli_light_03_unarmed_F"]
 
 /* 8 - Transport Planes */
 	,[]
