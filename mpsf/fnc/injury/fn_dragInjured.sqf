@@ -24,7 +24,8 @@ sleep 1;
 waitUntil{
 	!(alive _injured) ||
 	!(alive _dragger) ||
-	!([_injured] call mpsf_fnc_injuredIsBeingDragged)
+	!([_injured] call mpsf_fnc_injuredIsBeingDragged) ||
+	(_dragger getVariable ["mpsf_injury_inAgony",false])
 };
 
 detach _injured;

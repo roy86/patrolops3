@@ -12,8 +12,8 @@ if(_unitInAgony getVariable ["mpsf_injury_inAgony",false]) exitWith {};
 if(_unitInAgony == player) then { true call mpsf_fnc_setActionBusy };
 
 //apply a blood effect, this gets over written by the setdamage later
-_unitInAgony setHit ["hands",1];
-_unitInAgony setHit ["legs",1];
+//_unitInAgony setHit ["hands",1];
+//_unitInAgony setHit ["legs",1];
 [_unitInAgony] spawn mpsf_fnc_injuredEffects;
 
 // Begin Bloodloss FSM
@@ -53,13 +53,14 @@ waitUntil{
 	// If unit tries to stand, put them down
 	if !(stance player == "PRONE") then {
 		[true,"HINT","You are too injured to Stand"] call mpsf_fnc_hint;
+		_unitInAgony switchMove "";
 		[_unitInAgony,"Injured_AgonyStart"] call mpsf_fnc_animateUnit;
 	};
 
 	if (_unitInAgony getVariable ["mpsf_injury_BeingHealed",false]) then {
-		_unitInAgony enablesimulation false;
+		//_unitInAgony enablesimulation false;
 	}else{
-		_unitInAgony enablesimulation true;
+		//_unitInAgony enablesimulation true;
 	};
 	// Waituntil Unit is not in agony or is dead
 	!(_unitInAgony getVariable ["mpsf_injury_inAgony",false]) || !(alive _unitInAgony)

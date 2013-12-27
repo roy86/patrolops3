@@ -17,7 +17,9 @@ if(typeName _units != typeName []) then { _units = [_units] };
 {
 	_x removeAllEventHandlers "HandleDamage";
 	_x addEventHandler ["HandleDamage",{
-		_damage = (_this select 2)*2;
+		_unit 		= _this select 0;
+		_damage = (_this select 2)*2.25;
+		_unit setSkill 0;
 		_damage
 	}];
 }forEach _units;
