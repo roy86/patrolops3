@@ -1,4 +1,3 @@
-
 #define MPSF_BUTTON_ACTIVATE(CTRL) \
 	CTRL ctrlSetFade 0; \
 	CTRL ctrlEnable true; \
@@ -120,7 +119,7 @@ mpsf_fnc_squadmod_init = {
 								case "Recon" : { " (REC)" };
 								case "Marksman" : { " (MRK)" };
 								default { "" };
-							};
+							}
 						];
 						(uinamespace getvariable 'mpsf_hud_squadmod_lb1') lbSetPicture [ (lbSize (uinamespace getvariable 'mpsf_hud_squadmod_lb1')) - 1, _icon];
 					};
